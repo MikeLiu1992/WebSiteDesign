@@ -1,7 +1,7 @@
 <%@ page import ="java.util.*" %>
 <%@page import="com.sample.InstPrice"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="com.sample.OptionPrice" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,14 +25,14 @@
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Equity Analysis</a>
-    <form class="form-control form-control-dark w-100" method="post" action="stock-price">
-        <input type="text" placeholder="Search" aria-label="Search" id="inst-name" name="inst-name">
+    <form class="form-control form-control-dark w-100" method="post" action="option-price">
+        <input type="text" placeholder="Search" aria-label="Search" id="inst-name-option" name="inst-name-option">
         <input type="submit" value="Submit" style="display: none"/>
     </form>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <p><a href="https://finance.yahoo.com/" target="_blank">
-            <img src="asset/Yahoo_Finance_Logo_1.png" height = "40px">
+                <img src="asset/Yahoo_Finance_Logo_1.png" height = "40px" alt="centered image">
             </a></p>
         </li>
     </ul>
@@ -44,15 +44,15 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link" href="stock-price-welcome.jsp">
                             <span data-feather="dollar-sign"></span>
-                            Stock Price <span class="sr-only">(current)</span>
+                            Stock Price
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="option-price-welcome.jsp">
+                        <a class="nav-link active" href="#">
                             <span data-feather="activity"></span>
-                            Option Price
+                            Option Price <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -118,37 +118,32 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-                <h2>Stock Price</h2>
+                <h2>Option Price</h2>
                 <div class="table-responsive">
-                    <!--canvas class="my-4" id="StockChart" width="900" height="380"></canvas-->
-                    <div id='StockChart'></div>
-                    <table id= "Stock-Price" class="table table-striped table-sm">
+                    <div id='OptionChart'></div>
+                    <table id= "Option-Price" class="table table-striped table-sm">
                         <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Open</th>
-                            <th>Close</th>
-                            <th>High</th>
-                            <th>Low</th>
-                            <th>AdjClose</th>
-                            <th>Volume</th>
+                            <th>CallBidPrice</th>
+                            <th>CallAskPrice</th>
+                            <th>Strike</th>
+                            <th>PutBidPrice</th>
+                            <th>PutAskPrice</th>
                         </tr>
                         </thead>
-                        <tbody id="StockPrice">
-                            <%
-                                ArrayList<InstPrice> Prices = (ArrayList<InstPrice>) request.getAttribute("Price");
-                                for(InstPrice prc : Prices){
-                            %>
-                            <tr>
-                                <td><%=prc.getInstDate()%></td>
-                                <td><%=prc.getOpen()%></td>
-                                <td><%=prc.getClose()%></td>
-                                <td><%=prc.getHigh()%></td>
-                                <td><%=prc.getLow()%></td>
-                                <td><%=prc.getAdjClose()%></td>
-                                <td><%=prc.getVolume()%></td>
-                                <%}%>
-                            </tr>
+                        <tbody id="OptionPrice">
+                        <%
+                            ArrayList<OptionPrice> Prices = (ArrayList<OptionPrice>) request.getAttribute("OptionPrice");
+                            for(OptionPrice prc : Prices){
+                        %>
+                        <tr>
+                            <td><%=prc.getCallBid()%></td>
+                            <td><%=prc.getCallAsk()%></td>
+                            <td><%=prc.getStrike()%></td>
+                            <td><%=prc.getPutBid()%></td>
+                            <td><%=prc.getPutAsk()%></td>
+                            <%}%>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -171,28 +166,58 @@
     feather.replace()
 </script>
 
-<!-- Graphs -->
+!-- Graphs -->
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script src="asset/moment.jsp"></script>
 <script>
-    var closingPrices = document.querySelectorAll("#Stock-Price td");
-    var dates = [];
-    var closingPrice = [];
-    for (var i = 0; i < closingPrices.length; i += 7)
+    var lastPrice = document.querySelectorAll("#Option-Price td");
+    var strike = [];
+    var callBid = [];
+    var callAsk = [];
+    var putBid = [];
+    var putAsk = [];
+    for (var i = 0; i < lastPrice.length - 5; i += 5 )
     {
-        dates.push(closingPrices[i].innerHTML);
-        closingPrice.push(closingPrices[i + 5].innerHTML);
+        callBid.push(lastPrice[i].innerHTML);
+        callAsk.push(lastPrice[i + 1].innerHTML);
+        strike.push(lastPrice[i + 2].innerHTML);
+        putBid.push(lastPrice[i + 3].innerHTML);
+        putAsk.push(lastPrice[i + 4].innerHTML);
     }
-    var data = [
-    {
-        x: dates,
-        y: closingPrice,
-        type: 'scatter'
-    }
-    ];
-
-    Plotly.newPlot('StockChart', data);
+    var data1 =
+        {
+            x: strike,
+            y: callBid,
+            type: 'line',
+            name: 'Call Bid',
+            marker: {line: {width: 0.25}}
+        };
+    var data2 =
+        {
+            x: strike,
+            y: callAsk,
+            type: 'line',
+            name: 'Call Ask',
+            marker: {line: {width: 0.25}}
+        };
+    var data3 =
+        {
+            x: strike,
+            y: putBid,
+            type: 'line',
+            name: 'Put Bid',
+            marker: {line: {width: 0.25}}
+        };
+    var data4 =
+        {
+            x: strike,
+            y: putAsk,
+            type: 'line',
+            name: 'Put Ask',
+            marker: {line: {width: 0.25}}
+        };
+    var data = [data1, data2, data3, data4];
+    Plotly.newPlot('OptionChart', data);
 </script>
-
 </body>
 </html>

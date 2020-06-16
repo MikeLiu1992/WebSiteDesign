@@ -119,39 +119,6 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
                 <h2>Stock Price</h2>
-                <div class="table-responsive">
-                    <!--canvas class="my-4" id="StockChart" width="900" height="380"></canvas-->
-                    <div id='StockChart'></div>
-                    <table id= "Stock-Price" class="table table-striped table-sm">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Open</th>
-                            <th>Close</th>
-                            <th>High</th>
-                            <th>Low</th>
-                            <th>AdjClose</th>
-                            <th>Volume</th>
-                        </tr>
-                        </thead>
-                        <tbody id="StockPrice">
-                            <%
-                                ArrayList<InstPrice> Prices = (ArrayList<InstPrice>) request.getAttribute("Price");
-                                for(InstPrice prc : Prices){
-                            %>
-                            <tr>
-                                <td><%=prc.getInstDate()%></td>
-                                <td><%=prc.getOpen()%></td>
-                                <td><%=prc.getClose()%></td>
-                                <td><%=prc.getHigh()%></td>
-                                <td><%=prc.getLow()%></td>
-                                <td><%=prc.getAdjClose()%></td>
-                                <td><%=prc.getVolume()%></td>
-                                <%}%>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </main>
     </div>

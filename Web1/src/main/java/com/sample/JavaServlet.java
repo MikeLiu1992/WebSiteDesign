@@ -22,13 +22,24 @@ public class JavaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String instrumentName = req.getParameter("inst-name");
-        instrumentName.replaceAll("\\s+","");
-        YahooFinanceAPI priceTable = new YahooFinanceAPI(instrumentName);
-        ArrayList<InstPrice> priceList = priceTable.getPriceSeries();
-
-        req.setAttribute("Price", priceList);
-        RequestDispatcher view = req.getRequestDispatcher("stock-price.jsp");
-        view.forward(req, resp);
-
+        if (instrumentName != null)
+        {
+            instrumentName.replaceAll("\\s+","");
+            YahooFinanceAPI priceTable = new YahooFinanceAPI(instrumentName);
+            if (priceTable.isFileFound())
+            {
+                ArrayList<InstPrice> priceList = priceTable.getPriceSeries();
+                req.setAttribute("Price", priceList);
+                RequestDispatcher view = req.getRequestDispatcher("stock-price.jsp");
+                view.forward(req, resp);
+            }
+            else
+            {
+                ArrayList<InstPrice> priceList = new ArrayList<>();
+                req.setAttribute("Price", priceList);
+                RequestDispatcher view = req.getRequestDispatcher("stock-price-welcome.jsp");
+                view.forward(req, resp);
+            }
+        }
     }
 }

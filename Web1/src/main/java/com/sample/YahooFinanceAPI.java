@@ -13,33 +13,38 @@ import java.util.ArrayList;
 public class YahooFinanceAPI {
 
     private ArrayList<InstPrice> priceSeries = new ArrayList<InstPrice>();
+    private boolean fileFound = true;
 
-    public YahooFinanceAPI(String args) throws IOException {
-
+    public YahooFinanceAPI(String args) throws IOException
+    {
         YahooAddress APIAddress = new YahooAddress(args);
-        URL url = new URL(APIAddress.getFinalAddress());
+        String urlAddress= APIAddress.getFinalAddress();
+        URL url = new URL(urlAddress);
         URLConnection connection = url.openConnection();
-
-        InputStreamReader input = new InputStreamReader(connection.getInputStream());
         BufferedReader buffer = null;
         String line = "";
         String csvSplitBy = ",";
-        try {
-
+        try
+        {
+            InputStreamReader input = new InputStreamReader(connection.getInputStream());
             buffer = new BufferedReader(input);
-            buffer.readLine();
-            while ((line = buffer.readLine()) != null) {
-                String[] room = line.split(csvSplitBy);
-                String instDate = room[0];
-                double open = Double.parseDouble(room[1]);
-                double close = Double.parseDouble(room[4]);
-                double low = Double.parseDouble(room[3]);
-                double high = Double.parseDouble(room[2]);
-                double adjClose = Double.parseDouble(room[5]);
-                long volume = Long.parseLong(room[6]);
-                priceSeries.add(new InstPrice(instDate, open, close, low, high, adjClose, volume));
+            line = buffer.readLine();
+            if (line.contains("404 Not Found"))
+                fileFound = false;
+            else
+            {
+                while ((line = buffer.readLine()) != null) {
+                    String[] room = line.split(csvSplitBy);
+                    String instDate = room[0];
+                    double open = Double.parseDouble(room[1]);
+                    double close = Double.parseDouble(room[4]);
+                    double low = Double.parseDouble(room[3]);
+                    double high = Double.parseDouble(room[2]);
+                    double adjClose = Double.parseDouble(room[5]);
+                    long volume = Long.parseLong(room[6]);
+                    priceSeries.add(new InstPrice(instDate, open, close, low, high, adjClose, volume));
+                }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -56,5 +61,6 @@ public class YahooFinanceAPI {
     }
 
     public ArrayList<InstPrice> getPriceSeries() { return priceSeries; }
+    public boolean isFileFound() { return fileFound; }
 
 }

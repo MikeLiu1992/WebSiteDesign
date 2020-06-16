@@ -1,9 +1,8 @@
 package com.sample;
 
+import com.sample.model.InstrumentName;
+
 public class YahooAddress {
-    private String spx = "%5EGSPC";
-    private String ndx = "%5EIXIC";
-    private String dji = "%5EDJI";
 
 
     private String prefix = "https://query1.finance.yahoo.com/v7/finance/download/";
@@ -12,26 +11,11 @@ public class YahooAddress {
 
     public YahooAddress(String instrument)
     {
-        if (instrument.equals("SPX"))
-        {
-            finalAddress = prefix + this.spx + suffix;
-        }
-        else if (instrument.equals("NDX"))
-        {
-            finalAddress = prefix + this.ndx + suffix;
-        }
-        else if (instrument.equals("DJI"))
-        {
-            finalAddress = prefix + this.dji + suffix;
-        }
-        else
-        {
-            finalAddress = prefix + instrument + suffix;
-        }
+        InstrumentName instName = new InstrumentName(instrument);
+        finalAddress = prefix + instName.getInstName() + suffix;
     }
 
     public String getFinalAddress() {
         return finalAddress;
     }
-
 }
