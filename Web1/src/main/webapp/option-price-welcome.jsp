@@ -1,5 +1,5 @@
 <%@ page import ="java.util.*" %>
-<%@page import="com.sample.InstPrice"%>
+<%@page import="com.javamodule.object.InstPrice"%>
 <%@page import="java.util.ArrayList"%>
 <!doctype html>
 <html lang="en">
@@ -89,26 +89,14 @@
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
+                            <span data-feather="user"></span>
+                            Developer
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
-                            Last quarter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Social engagement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Year-end sale
+                            Disclaimer
                         </a>
                     </li>
                 </ul>

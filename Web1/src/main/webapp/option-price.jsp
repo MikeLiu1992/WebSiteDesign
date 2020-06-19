@@ -1,7 +1,8 @@
 <%@ page import ="java.util.*" %>
-<%@page import="com.sample.InstPrice"%>
+<%@page import="com.javamodule.object.InstPrice"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page import="com.sample.OptionPrice" %>
+<%@ page import="com.javamodule.object.OptionPrice" %>
+<%@ page import="com.javamodule.object.DateObject" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -90,26 +91,14 @@
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
+                            <span data-feather="user"></span>
+                            Developer
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
-                            Last quarter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Social engagement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Year-end sale
+                            Disclaimer
                         </a>
                     </li>
                 </ul>
@@ -118,7 +107,24 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-                <h2>Option Price</h2>
+                <form method="post" action="option-price">
+                <div class="exp-select" style="width:400px;">
+                    <%ArrayList<String> instName = (ArrayList<String>) request.getAttribute("InstNameOption");
+                    ArrayList<String> expirationName = (ArrayList<String>) request.getAttribute("CurrentExpDate");%>
+                    <input type="hidden" name="InstNameOption" id="InstNameOption" value=<%=instName.get(0)%>>
+                    <p style="display: inline; margin-right: 6px;">Underlying: <%=instName.get(0)%></p>
+                    <p style="display: inline; margin-right: 6px;">Expiration: <%=expirationName.get(0)%></p>
+                    <select id="expDates" name="expDates">
+                            <option value="0">Select Expiration:</option>
+                        <%
+                            ArrayList<DateObject> Dates = (ArrayList<DateObject>) request.getAttribute("ExpDate");
+                            for(DateObject SingleDate : Dates){
+                        %>
+                            <option value=<%=SingleDate.getEpochFormat()%>><%=SingleDate.getDateFormat()%></option>
+                        <%}%>
+                    </select><input type="submit" value="Submit" class="custom-inline-block">
+                </div>
+                </form>
                 <div class="table-responsive">
                     <div id='OptionChart'></div>
                     <table id= "Option-Price" class="table table-striped table-sm">

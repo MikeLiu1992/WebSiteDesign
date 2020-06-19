@@ -5,11 +5,11 @@
          version="4.0">
     <servlet>
         <servlet-name>JavaServlet</servlet-name>
-        <servlet-class>com.sample.JavaServlet</servlet-class>
+        <servlet-class>com.javamodule.JavaServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OptionServlet</servlet-name>
-        <servlet-class>com.sample.OptionServlet</servlet-class>
+        <servlet-class>com.javamodule.OptionServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -19,10 +19,6 @@
     <servlet-mapping>
         <servlet-name>JavaServlet</servlet-name>
         <url-pattern>/stock-price-welcome</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>JavaServlet</servlet-name>
-        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OptionServlet</servlet-name>

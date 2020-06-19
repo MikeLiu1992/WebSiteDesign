@@ -1,5 +1,5 @@
 <%@ page import ="java.util.*" %>
-<%@page import="com.sample.InstPrice"%>
+<%@page import="com.javamodule.object.InstPrice"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="java.lang.reflect.Array" %>
 <!doctype html>
@@ -90,26 +90,14 @@
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
+                            <span data-feather="user"></span>
+                            Developer
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
-                            Last quarter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Social engagement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Year-end sale
+                            Disclaimer
                         </a>
                     </li>
                 </ul>
@@ -119,6 +107,15 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
                 <h2>Stock Price</h2>
+                <div id="DateObject">
+                    <form method="post" action="stock-price">
+                        <label>Start Date: </label>
+                        <input name="startDate" type="date" id="start-date" name="start-date"/>
+                        <label>End Date: </label>
+                        <input name="endDate" type="date" id="end-date" name="end-date"/>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                </div>
             </div>
         </main>
     </div>
