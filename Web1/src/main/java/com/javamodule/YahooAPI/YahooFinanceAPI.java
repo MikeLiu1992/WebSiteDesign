@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,9 +21,12 @@ public class YahooFinanceAPI {
     public YahooFinanceAPI(String args, String stDate, String edDate) throws IOException
     {
         YahooAddress APIAddress = new YahooAddress(args);
-        if (stDate != null && edDate != null)
+        if (stDate != null && edDate != null && !stDate.equals("") && !edDate.equals("") &&
+                !stDate.equals("MAX_DATE") && !edDate.equals("MAX_DATE"))
         {
             APIAddress = new YahooAddress(args, stDate, edDate);
+            if (!APIAddress.getParsingSuccess())
+                APIAddress = new YahooAddress(args);
         }
         String urlAddress= APIAddress.getFinalAddress();
         URL url = new URL(urlAddress);

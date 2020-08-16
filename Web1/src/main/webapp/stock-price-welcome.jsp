@@ -25,10 +25,6 @@
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Equity Analysis</a>
-    <form class="form-control form-control-dark w-100" method="post" action="stock-price">
-        <input type="text" placeholder="Search" aria-label="Search" id="inst-name" name="inst-name">
-        <input type="submit" value="Submit" style="display: none"/>
-    </form>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <p><a href="https://finance.yahoo.com/" target="_blank">
@@ -109,10 +105,11 @@
                 <h2>Stock Price</h2>
                 <div id="DateObject">
                     <form method="post" action="stock-price">
+                        <input type="text" placeholder="Search" aria-label="Search" id="InstName" name="InstName">
                         <label>Start Date: </label>
-                        <input name="startDate" type="date" id="start-date" name="start-date"/>
+                        <input type="date" id="start-date" name="start-date"/>
                         <label>End Date: </label>
-                        <input name="endDate" type="date" id="end-date" name="end-date"/>
+                        <input type="date" id="end-date" name="end-date"/>
                         <input type="submit" value="Submit"/>
                     </form>
                 </div>

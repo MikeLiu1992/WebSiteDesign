@@ -111,7 +111,7 @@
                 <div class="exp-select" style="width:400px;">
                     <%ArrayList<String> instName = (ArrayList<String>) request.getAttribute("InstNameOption");
                     ArrayList<String> expirationName = (ArrayList<String>) request.getAttribute("CurrentExpDate");%>
-                    <input type="hidden" name="InstNameOption" id="InstNameOption" value=<%=instName.get(0)%>>
+                    <input type="hidden" name="InstNameOption" id="InstNameOption" value=<%=instName.get(0).toUpperCase()%>>
                     <p style="display: inline; margin-right: 6px;">Underlying: <%=instName.get(0)%></p>
                     <p style="display: inline; margin-right: 6px;">Expiration: <%=expirationName.get(0)%></p>
                     <select id="expDates" name="expDates">

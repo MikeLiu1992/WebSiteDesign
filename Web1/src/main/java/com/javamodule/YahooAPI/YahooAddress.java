@@ -18,6 +18,7 @@ public class YahooAddress {
     private String suffixMaxPartdefault = "&interval=1mo&events=history";
     private String suffixMaxPartdefaulDaily = "&interval=1d&events=history";
     private String finalAddress;
+    private boolean parsingSuccess = true;
 
     public YahooAddress(String instrument) {
         try{
@@ -36,11 +37,13 @@ public class YahooAddress {
     public YahooAddress(String instrument, String startDate, String endDate) {
         try {
             OptionPrice.InstrumentName instName = new OptionPrice.InstrumentName(instrument);
-            SimpleDateFormat dt = new SimpleDateFormat("mm/dd/yyyy");
+            SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
             DateObject stDate = new DateObject(startDate, dt);
             DateObject edDate = new DateObject(endDate, dt);
-            finalAddress = prefix + instName.getInstName() + suffixMaxPart1 + startDate
-                    + suffixMaxPart2 + endDate + suffixMaxPartdefaulDaily;
+            if (!stDate.getparsingSuccess() || !edDate.getparsingSuccess())
+                parsingSuccess = false;
+            finalAddress = prefix + instName.getInstName() + suffixMaxPart1 + stDate.getEpochFormat()
+                    + suffixMaxPart2 + edDate.getEpochFormat() + suffixMaxPartdefaulDaily;
         }
         catch (ParseException e)
         {
@@ -50,5 +53,9 @@ public class YahooAddress {
 
     public String getFinalAddress() {
         return finalAddress;
+    }
+
+    public boolean getParsingSuccess(){
+        return parsingSuccess;
     }
 }

@@ -25,10 +25,6 @@
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Equity Analysis</a>
-    <form class="form-control form-control-dark w-100" method="post" action="stock-price">
-        <input type="text" placeholder="Search" aria-label="Search" id="inst-name" name="inst-name">
-        <input type="submit" value="Submit" style="display: none"/>
-    </form>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <p><a href="https://finance.yahoo.com/" target="_blank">
@@ -106,16 +102,25 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div>
-                <%String instName = (String) request.getAttribute("InstrumentName");%>
-                <input type="hidden" name="InstNameHidden" id="InstNameHidden" value=<%=instName%>>
-                <h4><%=instName%></h4>
+                <%String instName = (String) request.getAttribute("InstrumentName");
+                String startDate = (String) request.getAttribute("StartDate");
+                if (startDate.equals("")) startDate = "MAX_DATE";
+                String endDate = (String) request.getAttribute("EndDate");
+                if (endDate.equals("")) endDate = "MAX_DATE";%>
+                <p style="display: inline;"><%=instName%></p>
+                <p style="display: inline;">Start Date: <%=startDate%></p>
+                <p style="display: inline;">End Date: <%=endDate%></p>
                 <div class="table-responsive">
                     <div id="DateObject">
                         <form method="post" action="stock-price">
+                            <input type="text" placeholder="Search" aria-label="Search" id="InstName" name="InstName">
+                            <input type="hidden" name="InstNameHidden" id="InstNameHidden" value=<%=instName%>>
+                            <input type="hidden" name="StartDateHidden" id="StartDateHidden" value=<%=startDate%>>
+                            <input type="hidden" name="EndDateHidden" id="EndDateHidden" value=<%=endDate%>>
                             <label>Start Date: </label>
-                            <input name="startDate" type="date" id="start-date" name="start-date"/>
+                            <input type="date" id="start-date" name="start-date"/>
                             <label>End Date: </label>
-                            <input name="endDate" type="date" id="end-date" name="end-date"/>
+                            <input type="date" id="end-date" name="end-date"/>
                             <input type="submit" value="Submit"/>
                         </form>
                     </div>
