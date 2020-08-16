@@ -112,17 +112,17 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="European" role="tab" aria-controls="home" aria-selected="true">European</a>
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="security-pricer.jsp" role="tab" aria-controls="home" aria-selected="true">European</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="American" role="tab" aria-controls="profile" aria-selected="false">American</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="america.jsp" role="tab" aria-controls="profile" aria-selected="false">American</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="MonteCarlo" role="tab" aria-controls="contact" aria-selected="false">MonteCarlo</a>
-                    </li>security-pricer.jsp
+                        <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#" role="tab" aria-controls="contact" aria-selected="false">MonteCarlo</a>
+                    </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <h3>European</h3>
+                    <h3>MonteCarlo</h3>
                 </div>
             </main>
         </div>

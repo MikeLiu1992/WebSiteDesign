@@ -55,7 +55,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="security-pricer.jsp">
                             <span data-feather="tool"></span>
                             Security Pricer
                         </a>
@@ -98,22 +98,24 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="w3-content w3-container w3-padding-64" id="about">
+            <div class="w3-content w3-container w3-padding-10" id="about">
                 <h3 class="w3-center">ABOUT ME</h3>
-                <p class="w3-center"><em>I love photography</em></p>
-                <p>We have created a fictional "personal" website/blog, and our fictional character is a hobby photographer. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                    qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p class="w3-center"><em>Financial Technology is the Key!</em></p>
+                <p>I created this website as a playground for financial data. Data is provided by YahooFinance for free. However,
+                    it should not be used for any commercial purpose. This website can be used for as a starting point for anyone passionate
+                    about finance and would like to get some exposure to some industry technique like finianical analysis and derivative
+                    pricing.</p>
                 <div class="w3-row">
+                   <!-- Hide this text on small devices -->
                     <div class="w3-col m6 w3-center w3-padding-large">
-                        <p><b><i class="fa fa-user w3-margin-right"></i>My Name</b></p><br>
-                        <img src="asset/avatar.jpg" class="w3-round w3-image w3-opacity w3-hover-opacity-off" alt="Photo of Me" width="100"></div>
-
-                    <!-- Hide this text on small devices -->
+                        <p><b><i class="fa fa-user w3-margin-right"></i>Michael Liu</b></p><br>
+                        <img src="asset/avatar.jpg" class="w3-round w3-image w3-opacity w3-hover-opacity-off" alt="Photo of Me" width="125">
+                    </div>
                     <div class="w3-col m6 w3-hide-small w3-padding-large">
-                        <p>Welcome to my website. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>I am a typical Wall Street desk Quant dealing with data and model everyday and I believe technology is the key to
+                            financial innovation. I want to use this website as a playground for parsing and processing financial data and
+                            try out various techniques in the industry. I am always welcome to feedback and let me know your thoughts!
+                        </p>
                     </div>
                 </div>
             </div>
@@ -138,9 +140,18 @@
                             <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
                         </div>
                     </div>
-                    <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+                    <input class="w3-input w3-border" type="text" placeholder="Message" required name="eMessage">
                     <input class="w3-button w3-black w3-right w3-section" type="submit" value="SEND MESSAGE">
+                    <p><%=request.getAttribute("Message")%></p>
                 </form>
+            </div>
+            <div class="w3-xlarge w3-section">
+                <a href ="https://www.linkedin.com/in/yanxiong-michael-liu-cfa-1673177b/ ">
+                    <i class="fa fa-linkedin fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                </a>
+                <a href ="https://github.com/MikeLiu1992/ ">
+                    <i class="fa fa-github fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i>
+                </a>
             </div>
         </main>
     </div>
