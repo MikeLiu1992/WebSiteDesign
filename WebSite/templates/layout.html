@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<title>Quant Note</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/style.css">
+
+<link rel="stylesheet" href="../static/codemirror/lib/codemirror.css">
+<script src="../static/codemirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../static/codemirror/addon/hint/show-hint.css">
+<script src="../static/codemirror/addon/hint/show-hint.js"></script>
+<script src="../static/codemirror/addon/edit/matchbrackets.js"></script>
+<script src="../static/clike.js"></script>
+
+<link rel="shortcut icon" href="../static/computer.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="../static/codemirror/theme/abcdef.css">
+<script src="../static/codemirror/addon/runmode/colorize.js"></script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+<body>
+
+<!-- Sidebar -->
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:10%">
+  <a href="/"style="text-decoration: none;"><h3 class="w3-bar-item">Quant Note</h3></a>
+  <a href="/" class="w3-bar-item w3-button">Home</a>
+  <a href="avx-performance" class="w3-bar-item w3-button">C++ Vectorization</a>
+  <a href="hpc-vector" class="w3-bar-item w3-button">HPC Vector</a>
+  <a href="project-euler" class="w3-bar-item w3-button">Project Euler</a>
+  <div class="w3-dropdown-hover">
+    <button class="w3-button">Stochastic Process
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="w3-dropdown-content w3-bar-block">
+      <a href="counting-process" class="w3-bar-item w3-button">Intro, Counting Process</a>
+      <a href="poisson-process" class="w3-bar-item w3-button">Poisson Process</a>
+      <a href="markov-process" class="w3-bar-item w3-button">Markov Process</a>
+      <a href="gaussian-process" class="w3-bar-item w3-button">Gaussian Process</a>
+      <a href="stationary-process" class="w3-bar-item w3-button">Stationary</a>
+    </div>
+  </div> 
+  <a href="about" class="w3-bar-item w3-button">About</a>
+</div>
+
+<!-- Page Content -->
+<div style="margin-left:10%">
+<div class="w3-container w3-teal">
+  <h1>
+  {% block title %}
+  {% endblock %}
+  </h1>
+</div>
+<div class="w3-container">
+  {% block main %}
+  {% endblock %}
+</div>
+</body>
+</html>

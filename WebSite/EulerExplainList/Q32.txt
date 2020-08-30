@@ -1,0 +1,1 @@
+Since it is a multiplication calculation, \(a\times b = c\) Therefore: \(c > a\). As a result \(a\) can't have more than 4 digits. We can then do the permutation from 1 to 9 using next_permutation function.

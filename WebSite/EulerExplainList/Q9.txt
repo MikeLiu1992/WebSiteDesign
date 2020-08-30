@@ -1,0 +1,8 @@
+Some math here can greatly reduce our time for the calculation:
+\(a + b + c = 1000\)
+\(a ^ 2 + b^2 = c^2\)
+The above two formula gives us:
+\(a ^ 2 + (1000 - a - c) ^ 2 = c^2\)
+Therefore:
+\((1000 - a)(c + a) = 500 \times 1000\)
+Since both are integer they have to be the perfect divisor of \(500 \times 1000 = 2^5 \times 5^6\) gives us a more efficient for loop below: (We see the result printed twice since \(a\) and \(b\) are interchangable)

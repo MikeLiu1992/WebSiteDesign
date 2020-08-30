@@ -1,0 +1,5 @@
+The number itself is a super huger number. Here we will use some number property here.
+
+Some thing to note for Prime factor is that if \(n\) is not a prime number it self, it must have prime factor lower than \(\sqrt{n}\). Therefore, we can try find all prime numbers below \(\sqrt{n}\) and keep on doing division. This will greatly reduce the value of the number in question.
+
+Since \(600851475143 < 1e12\), we only need to find all prime number between \(1\) to \(1e6\). And verify if the original value can be reduced to 1. This gives the following result, and we can find that the largest prime number is 6857

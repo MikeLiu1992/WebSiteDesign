@@ -1,0 +1,5 @@
+Some interesting fact there which can greatly speed up our computation:
+$$\Sigma_{i = 1}^nn^2 = \frac{1}{6}n(n + 1)(2n + 1)$$
+And:
+$$\Sigma_{i = 1}^nn = \frac{1}{2}n(n + 1)$$
+This gives us the following result:

@@ -1,0 +1,5 @@
+Question can be solved by using dynamic programming.
+
+If we have \(a[n - 1][m]\) ways to grid \((n-1,m)\) and \(a[n][m - 1]\) ways to grid \((n,m-1)\). Then we will have \(a[n - 1][m] + a[n][m-1]\) ways to \(a[n][m[\).
+
+We also know that there are only 1 way to \(a[0][m]\) or \(a[n][0]\). The result can thus be calculated using dynamic programming.

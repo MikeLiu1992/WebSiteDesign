@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Poisson Process
+{% endblock %}
+
+
+{% block main %}
+<p>This section gives a brief over view of the Poisson Process</p>
+<ul>
+    <li><b>Definition</b><br>
+    The Poisson process is a renewal process such that \(\xi_i\) has exponential distribution. (i.e.
+    \(\xi_i \sim p(x) = \lambda e^{-\lambda x} x > 0\)). Here \(\lambda\) means intensity rate.
+    </li>
+    <li><b>Theorem I: distribution function of \(S_n\)</b>
+        $$S_n \sim 1 - e^{-\lambda x}\Sigma_{k = 0}^{n - 1}\frac{(\lambda x)^k}{k!}$$
+        $$P_n(x) = \lambda e^{-\lambda x}\frac{(\lambda x)^{n-1}}{(n-1)!}$$
+    </li>
+    <li><b>Theorem II: distribution function of \(N_t\)</b>
+        $$P(N_t = n) = e^{-\lambda t}\frac{(\lambda t)^n}{n!}$$
+        <p>That is \(N_t \sim Poisson(\lambda t)\)</p>
+    </li>
+    <li><b>Memoryless Property</b></li>
+    A random variable X possesses the Memoryless property if:
+    $$P[X > u + v] = P[X > u]P[X > v]$$
+    If \(P[X > v] > 0\) Then:
+    $$P[X > u + v | X > v] = P[X > u]$$
+    <li><b>Theorem III</b><br>
+        Let X be a random variable with density \(p(x)\) then <br>
+        X is memoryless \(\iff p(x) = \lambda e^{-\lambda x}\)</li>
+    <li><b>Limit of Poisson Process:</b>
+    $$lim_{h\rightarrow 0}P(N_{t+h} - N_t = 0) = 1 - \lambda h + O(h)$$
+    $$lim_{h\rightarrow 0}P(N_{t+h} - N_t = 1) = \lambda h + O(h)$$
+    $$lim_{h\rightarrow 0}P(N_{t+h} - N_t \geq 2) = O(h)$$
+    </li>
+    <li><b>Other Definition</b></li>
+    <p>We can also define poisson process as \(N_0 = 0\) and \(N_t\) has independent and stationary increment and :
+        <ul>
+            <li>\(N_t - N_s \sim Poisson(\lambda(t - s))\)</li>
+            <li>or \(lim_{h\rightarrow 0}\frac{P(N_{t+h} - N_t \geq 2)}{P(N_{t+h} - N_t = 1)} = 0\)</li>
+        </ul>
+    </p>
+    <li><b>Non-Homogenous Poisson Process</b>
+    <p>
+    Definition: Let \(\Lambda(t)\) be a differentiable increasing function and \(\Lambda(0) = 0\). Then \(X_t = N_t\) is a Non-Homogenous Poisson Process:
+    <ul>
+        <li>\(N_0 = 0\)</li>
+        <li>\(N_t\) has independent increment</li>
+        <li>\(N_t - N_s \sim Poisson(\Lambda(t) - \Lambda(s))\)</li>
+    </ul>
+    <br>Here \(\lambda(t) = \Lambda'(t)\) is called intensity function<br>
+    Propeties of the process:
+    <ul>
+        <li>\(\mathbb{E}[N_t] = \Lambda(t)\)</li>
+        <li>\(N_{\Lambda^{-1}(t)}\) is a Homogenous Poisson process</li>
+    </ul>
+    </p>
+</ul>
+{% endblock %}

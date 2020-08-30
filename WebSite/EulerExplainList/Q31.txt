@@ -1,0 +1,1 @@
+We can do it using mathematical recurrsion where we choose \(m\) \(a_m\) value coin then the method equals to the remaining ways to construct the rest of the value.

@@ -1,0 +1,1 @@
+The key question here is find out the recurring cycle of a given number. The logic is that either we divided up completelyl or we find the same value cached in the map (That means the pattern is repeated). This gives us the answer below:

@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Introduction and Counting Process
+{% endblock %}
+
+{% block main %}
+<p>This section gives a brief overview of stochastic process and counting process</p>
+<ul>
+    <li><b>Probability Space</b></li>
+    <p>Before we introduce stochastic process, we need an understanding of probability space. Namely \((\Omega, \mathcal{F}, P)\) notation.Here is a table gives the definition of the probability space.</p> 
+    <table class="w3-table">
+        <tr><td>General Theory</td><td>Bernoulli Dist</td><td>[0,1] Uniform</td></tr>
+        <tr><td>\(\Omega\) is Sample Space</td><td>0 or 1<br>#\(\Omega = 2^n\)</td><td>[0,1] Inverval</td></tr>
+        <tr>
+            <td>\(\mathcal{F}\) is \(\sigma\)-algebra</td>
+            <td>\(\mathcal{F}\) is the power set
+                <br>#\(\mathcal{F} = 2^{2^n}\) </td>
+            <td>All kinds of interval between 0 and 1 
+                <br>(can be \((\alpha, \beta), 
+                [\alpha, \beta], (\alpha, \beta], \{\beta\}...\)) and  their countable union)
+                <br>We call this Borel \(\sigma\)-algebra</td>
+        </tr>
+        <tr><td>\(P\) is probability measure</td>
+            <td>\(P(1) = p, P(0) = 1 - p\)</td>
+            <td>\(P([\alpha, \beta]) = \beta - \alpha\)</td>
+        </tr>
+    </table>
+    <p>Some properties for \(\sigma\)-algebra \(\mathcal{F}\)</p>
+    <ul>
+        <li>\(\Omega \in \mathcal{F}\)</li>
+        <li>\(\mathcal{F}\) is closed under compliment which means if \(A \in \mathcal{F}\) then \(A^c \in \mathcal{F}\)</li>
+        <li>\(\mathcal{F}\) is closed under countable union which means if \(A_1, A_2...A_n... \in \mathcal{F}\) then \(\bigcup_{i = 1}^{1,2,...,n,...}A_i \in \mathcal{F}\)</li>
+    </ul>
+    <p>Some properties for probability measure \(P\) which is function mapping from \(\mathcal{F}\) to [0,1]</p>
+    <ul>
+        <li>\(P(\Omega) = 1\)</li>
+        <li>If \(A_1, A_2...A_n... \in \mathcal{F}\) are not intersectable then:
+            <br> \(P(\bigcup_{i = 1}^{1,2,...,n,...}A_i) = \Sigma_{i = 1}^{1,2,...,n,...}P(A_i)\)
+        </li>
+    </ul>
+    <br>
+    <li><b>Stochastic Process</b></li>
+    <ul>
+        <li>Random Variable:</li>
+        <p>Given a probability space \((\Omega, \mathcal{F}, P)\) a random variable is a measurable function:</p>
+        $$\xi:\Omega \rightarrow \mathbb{R}$$
+        measurable here means that:
+        $$\forall B \in B(\mathbb{R}): \xi^{-1}(B) \in \mathcal{F}$$
+        <li>Random Function:</li>
+        <p>Given a time \(T\) function \(X: T\times \Omega \rightarrow \mathbb{R}\) is a randome function if:
+            <br> \(\forall t \in T: X(t,)\) is a random variable on probability space \((\Omega, \mathcal{F}, P)\)</p>
+        Some intersting random functions:
+        <ul>
+            <li>if \(T = \mathbb{R}_+\) then \(X_t\) is a random process or stochastic process</li>
+            <li>if \(T = \mathbb{R}_+^n\) then \(X_t\) is a random field or stochastic field</li>
+            <li>if \(T = \mathbb{N}\) then \(X_t\) is a random process with discrete time</li>
+            <li>if \(T = \mathbb{R}_+\) then \(X_t\) is a random process with continuous time</li>
+        </ul>
+        <li>Trajectory(Path) is a random function mapping with fixed \(\Omega\)</li>
+        <li>Finite-dimension distribution is a vector of random variable \((X_{t_1},X_{t_2}...X_{t_n})\) where \(t_1, t_2,...t_n \in \mathbb{R}\)</li>
+    </ul>
+    <li><b>Renewal Process</b></li>
+    Renewal Process is a discrete time process where \(S_0 = 0, S_n = S_{n-1} + \xi_n\) where \(\xi_1, \xi_2...\xi_n\) are iid random variables of a positive distribution <br>
+    Based on Renewal Process a counting process is \(N_t = argmax_k \{S_k \leq t\}\)  where \(S_1, S_2...\) are renewal times and \(\xi_1, \xi_2...\) are interval times. We can deduce that \(\{S_n > t\} = \{N_t < n\}\). Now we can try calculate the expectation of \(N_t\).
+    <ul>
+        <li>Convulusion: \(X\sim F_X , Y\sim F_y\) where X and Y are iid then:</li>
+        $$F_{X + Y}(x) = \int_\mathbb{R}F_X(x - y)dF(y)$$ is denoted as \(F_X \circledast F_Y\) this is Convulusion in terms of distribution function.
+        if \(X\sim p_x, Y\sim p_y\) then:
+        $$P_{X+Y}(x) = \int_\mathbb{R}p_X(x - y)p_y(y)dy$$ is denoted as \(p_X \circledast p_Y\). this is convulusion in terms of density.
+    </ul>
+    Therefore we denote n-fold convolusion of the counting process as \(F^{n*}\). There are Some interesting property of this object. 
+    <ul>
+        <li> \(F^{n*}(x) \leq F^n(x)\) provided \(F(0) = 0\)</li>
+        <li> \(F^{n*}(x) \geq F^{(n + 1)*}(x)\) provided \(F(0) = 0\)</li>
+    </ul>
+    Theory: Let \(S_n = S_{n - 1} + \xi_n\) where \(\xi_1, \xi_2...\) are i.i.d and F(0) = 0 then: 
+    <ul>
+        <li>\(U(t) = \Sigma_{n=1}^\infty F^{n*}(t) < \infty\)</li>
+        <li>\(\mathbb{E}(N_t) = U(t)\)</li>
+    </ul>
+    Based on the above theory, we need a proper way of calculating \(\Sigma_{n=1}^\infty F^{n*}(t)\). Let's recall the Laplace transform: \(L_f(s) = \int_0^\infty e^{sx}f(x)dx \) where:
+    <ul>
+        <li>if \(f\) is a desity function of \(\xi\) then \(L_f(s) = \mathbb{E}[e^{-s\xi}] \)</li>
+        <li>\(L_{f_1 \circledast f_2}(s) = L_{f_1}(s)L_{f_2}(s) \)</li>
+        <li>if \(F\) is a distribution function, F(0) = 0 and \(p\) is the distribution then \(L_F(s) = L_p(s) / s\)</li>
+    </ul>
+    <p>Some interesting formula for Laplace transformation:\(L_{x^n}(s) = \frac{n!}{S^{n + 1}}\) and \(L_{e^{ax}}(s) = \frac{1}{s - a}\) if \(a < s\)
+    Now we can try solve the counting process:<br>
+    $$EN_t = U(t) = \Sigma_{n=1}^\infty F^{n*}(t) = F(t) + (\Sigma_{n=1}^\infty F^{n*}(t)) \circledast F(t)$$
+    $$ = U(t)\circledast F(t) + F(t) = F(t) + U(t)\circledast p(t) $$
+    Applying Laplace transform on both side: 
+    $$L_u(s) = L_F(s) + L_u(s)L_p(s) = \frac{L_p(s)}{s} + L_u(s)L_p(s)$$
+    Therefore:
+    $$L_U(s) = \frac{L_p(S)}{s(1 - L_p(s))}$$
+    Therefore the proper way is to first calculate the laplace transformation of \(L_p(s)\) then we get \(L_u(s)\) then backward deduct \(U(s)\)
+    Also (Law of Large Number)
+    $$lim_{t\rightarrow \infty}\frac{N_t}{t} = \frac{1}{\mathbb{E}[\xi_1]}$$
+    Also (Central Limit Theory)
+    $$lim_{t\rightarrow \infty}\frac{N_t - t/\mu}{Var(\xi_1)\sqrt{t}\mu^{-3/2}} \rightarrow N(0, 1)$$
+    </p>
+</ul>
+{% endblock %}

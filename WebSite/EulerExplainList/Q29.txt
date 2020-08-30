@@ -1,0 +1,1 @@
+The key thing here is to avoid double counting on numbers already calculated. For example \(4 = 2^2\) and should only be counted once. Therefore, we added a container to store those used values here.

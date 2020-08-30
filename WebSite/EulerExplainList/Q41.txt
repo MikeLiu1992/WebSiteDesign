@@ -1,0 +1,1 @@
+We want to have as many digits as possible if we want the pandigital to be large. We can't have 1 to 9 or 1 to 8 since they are divissable by 3. We therefore list all the number from 1 to 7 then try all the premutation and see which one is prime.

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    High Performance Vector
+{% endblock %}
+
+
+{% block main %}
+<p>I have implemented a high Performance vector using C++ immintrin library and did an preliminary estimate of the Performance. Raw code can be found <a href="https://github.com/MikeLiu1992/CPlusPlus/blob/master/quant_vec.h"> here.</a> During the analysis I found that compared with normal arithmetic operation, inplace operation took much less time since it avoids creating copy of the of result by direct doing operation on memory address. Therefore, I only included inplace plus, minus and division operation. I created 10000000 random values and compare the computation time between C++ STL vector normal calculation and AVX calcuation and here is the result:</p>
+
+<ul>
+    <li><b>Double Operation:</b></li>
+    normal vector plus time: 47866ms<br>
+    avx vector plus time: 24671ms<br>
+    normal vector minus time: 49019ms<br>
+    avx vector minus time: 21862ms<br>
+    normal vector multiply time: 47873ms<br>
+    avx vector multiply time: 21873ms<br>
+    normal vector divide time: 49125ms<br>
+    avx vector divide time: 22687ms<br>
+    <li><b>Float Operation:</b></li>
+    normal vector plus time: 47921ms<br>
+    avx vector plus time: 10324ms<br>
+    normal vector minus time: 47929ms<br>
+    avx vector minus time: 11130ms<br>
+    normal vector multiply time: 48763ms<br>
+    avx vector multiply time: 12257ms<br>
+    normal vector divide time: 48901ms<br>
+    avx vector divide time: 10988ms<br>
+</ul>
+
+For your reference, here is my machine config, performance result maybe different across different hardware:<br><br>
+Architecture:        x86_64<br>
+CPU op-mode(s):      32-bit, 64-bit<br>
+CPU Model name:      Intel(R) Core(TM) i5-8500T CPU @ 2.10GHz<br>
+Hypervisor vendor:   Windows Subsystem for Linux<br><br>
+
+<p>From the above, we can see that avx can provide 50% speed up compared with normal vector calculation doing inplace arithmetic calculation for double and 75% speed up doing calculation for float as avx register is able to hold 8 float value at the same time and therefore able to boost performance even further. </p>
+
+
+{% endblock %}

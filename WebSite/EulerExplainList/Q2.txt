@@ -1,0 +1,1 @@
+We can direcly calculate the sum of each term in Fibonacci sequance. 4 million might be a big number, however, note that Fibonacci sequqnce is a exponecially groth sequence. Therefore it won't be too many terns. This gives us the result below:

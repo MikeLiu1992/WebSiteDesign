@@ -1,0 +1,5 @@
+This tricky part here is to calculate the sum of all proper divisor. We use prime factorization to calculate it. Here is how we do that assume:
+$$x = a_1^{x_1}a_2^{x_2}...a_n^{x_n}$$
+Then the sum of all the proper factorial of \(x\) would be:
+$$\Pi_{i=1}^n\Sigma_{j=0}^{x_i}a_i^j$$
+And we can use geometric series sum formula to simplify the calculation. We also pre calculate all the sum of proper divisor below 10000 then find the value so we don't have to recalculate some values.

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Gaussian Process
+{% endblock %}
+
+
+{% block main %}
+<p>This Section gives a brief introduction to the Gaussian process.</p>
+<ul>
+    <li><b>Gaussian Vector:</b></li>
+    <p>A r.v. vector \(X\) is a Gaussian Vector if \(\forall \lambda, \lambda X \sim N(\mu,\sigma^2)\)</p>
+    <p>Theorem: r.v. vector \(X\) is Gaussian if and only if the following condition holds:</p>
+    <p>
+        <ul>
+            <li>\(\phi_\vec{X}(\vec{u}) = \mathbb{E}(e^{i\vec{u}\times\vec{X}})=exp(i\vec{u}\times\vec{\mu}-\frac{1}{2}\vec{u}^TC\vec{u})\)</li>
+            <p>Here \(\mu \in \mathbb{R}^n\) and \(C\) is positive semi-definite of size \(n \times n\)</p>
+            <li>\(\vec{X} = A\vec{x}^0 + \vec{\mu}\)</li> Where A can be any matrix of \(n \times n\) and \(\vec{x}^0\) is a standard normal vector
+            <li>Let \(X1, X2\) be r.v. from normal distribution and \(corr(X1, X2) = 0\) then X1, X2 are independent if and only if \((X1, X2)\) is a Gaussian vector</li>
+        </ul>
+    </p>
+    <li><b>Gaussian Process:</b></li>
+    <p>A Gaussian process \(X_t\) is a stochastic process where \(\forall t1, t2...tn, (X_{t1},X_{t2}...X_{tn})\) is a Gaussian Vector</p>
+    <p>Theorem: Let \(m:R_+ \rightarrow R\) and \(K: R_+\times R_+ \rightarrow R\) then there exists an Gaussian process \(X_t\) such that \(\mathbb{E}X_t = m(t)\) and \(Cov(X_t, X_s) = K(t,s)\)</p>
+    <li><b>Brownian Motion (Wiener Process):</b></li>
+    <p>Definition 1: Brownian motion is a Gaussian process s.t. \(m(t) = 0, K(t,s) = min(t, s)\)</p>
+    <p>Definition 2: Brownian motion is a stochastic process s.t.</p>
+    <ul>
+        <li>\(B_0 = 0\)</li>
+        <li>\(B_t\) is independent</li>
+        <li>\(B_t-B_s \sim N(0,t-s)\)</li>
+    </ul>
+    <p>Kolomogorov Continuity Theorem:</p>
+    <p>\(X_t, Y_t\) are stochastic equivalent if \(P(X_t = y_t) = 1, \forall t \geq 0\)</p>
+    <p>If:
+        $$\exists C, \alpha, \beta > 0 s.t. \mathbb{E}|X_t - X_s|^\alpha \leq C|t -s|^{1 + \beta} ,\forall t,s \in [a,b]$$
+    Then \(\exists y_t\) stochastic equivalent to \(X_t\) s.t. \(y_t\) has continuous trajectory. We call \(y_t\) the continuous modification. Brownian motion has continuous modification</p>
+    <li><b>Brownian Motion Properties:</b></li>
+    <ul>
+        <li>Quadratic Variation:</li>
+        Given:$$\Sigma_{k=1}^nt_k = t$$
+        We have:
+        $$lim_{n->\infty}\Sigma_{k=1}^n(B_{t_k} - B_{t_{k-1}})^2 = t$$
+        <li>Brownian motion is everywhere continuous but no where differentiable.</li>
+        <li>\(lim_{t->\infty}\frac{B_t}{t} = 0\)</li>
+    </ul>
+</ul>
+{% endblock %}

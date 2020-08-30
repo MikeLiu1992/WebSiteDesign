@@ -1,0 +1,1 @@
+In order to save time, we can precalc the factorial from 0 to 9 and store it so we don't have to recalculate it. Also, N digit factorial sum can be think of as N - 1 digit factorial sum plus one more digit, this can also saves time.

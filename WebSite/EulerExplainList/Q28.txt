@@ -1,0 +1,1 @@
+The question is straight forward, we just need to be careful of the direction movement to make sure it is circling around in spiral pattern.

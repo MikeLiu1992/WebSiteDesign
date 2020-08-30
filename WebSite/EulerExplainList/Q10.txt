@@ -1,0 +1,1 @@
+We can directly loop through all the prime below \(2e6\). Using the method of prime finding I pointed out in <b>Question 3</b> can greatly improve the computational efficiency. Gives us the following result.

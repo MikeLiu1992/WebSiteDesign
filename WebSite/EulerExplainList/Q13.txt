@@ -1,0 +1,1 @@
+This question involves summation of super huge number, therefore, instead of directly using long, we use string as summation tool along with adder. This gives the solution below:

@@ -1,0 +1,1 @@
+The question specifically mentioned that there are only 11 truncatable primes. Therefore, we only have to guess an initial range and see if we can obtain all 11 primes within this range. I chose \((0, 1e6)\) as a range estimate and see if I can find 11 primes here using the prime finding logic in previous questions.

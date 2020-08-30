@@ -1,0 +1,1 @@
+The Question is pretty straight forward. We can loop through all the grid can compute what is the maximum and minimum value here. Thus gives us the code and the result below. I have printed out the result for horizontal, vertical, and two way diagonal. The result turns out to be the reverse diagnoal with 12 and 6 as the starting point.

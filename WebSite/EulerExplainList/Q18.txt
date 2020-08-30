@@ -1,0 +1,1 @@
+Other than finding the path value for each possible path, we find the max path to reach each point. Since the max path to reach point n must be using the max path from all points leads to point n. This will reduce the total amount of path to be the number of points on last level. Leading to the below solution.

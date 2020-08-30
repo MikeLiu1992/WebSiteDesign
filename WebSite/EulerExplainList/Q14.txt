@@ -1,0 +1,1 @@
+THe straight forward way would be to loop through all numbers below 1000000, however, we don't have to complete all steps until one. However, we can try store the already calculated collatz value into unordered map so we don't have to calculate it again. Below is the answer.

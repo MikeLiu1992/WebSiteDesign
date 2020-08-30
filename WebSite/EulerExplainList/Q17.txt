@@ -1,0 +1,1 @@
+The solution is straight forward. English word for numbers are divided into 3 different types: ones, tens and ten multiples. We only have to classify them accordingly and sum up the word length.

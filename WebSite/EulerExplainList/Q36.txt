@@ -1,0 +1,1 @@
+Other than finding the numbers one by one, we construct binary and decimal palindromes first then try to see if there are any intersection between the two sets.

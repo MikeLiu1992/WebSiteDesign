@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    C++ Vectorization
+{% endblock %}
+
+
+{% block main %}
+<p>This section explore some C++ Vectorization method using AVX. <b>Advanced Vector Extension (AVX)</b> are extensions to the x86 instruction set architecture for microprocessors from Intel and AMD first supported by Intel with Sandy Bridge processr. It is a set of instruction to perform SIMD (Single Instruction Multiple Data).</p>
+<ul>
+<li><b>What is SIMD?</b></li>
+<p><b>Single instruction, multiple data (SIMD)</b> is a class of parallel computers. It describes computers with multiple processing elements that perform the same operation on multiple data points simultaneously. Such machines exploit data level parallelism but not cocurrency. Compared with normal cmputation method, SIMD bundle data per packet (vectorization) and apply a single instruction on the whole data packet, therefore improves computational efficiency by apply the instruction only once. Here is an illustration, assume we have two double vectors and each vecor has four numbers \(V1 = (a_1, b_1, c_1, d_1)\) and \(V2 = (a_2, b_2, c_2, d_2)\) and we want to do an element summation of the two vectors. Below is an example of the code for using AVX (a SIMD method) and normal C++ array. Right hand side gives the assembly code</p>
+
+<div class="w3-cell-row" id="code_panel">
+    <div class="w3-cell", style="width: 60%">
+        <h3>C++ Code:</h3>
+        <form style="position: relative; margin-top: .5em;">
+            <textarea id=avx-code>{{content}}</textarea>
+        </form>
+    </div>
+    <div class="w3-cell", style="overflow: auto;">
+        <h3>Assembly Code:</h3>
+        <form style="position: relative; margin-top: .5em;">
+            <textarea id=assebmly-code>{{assem}}</textarea>
+        </form>
+    </div>
+</div>
+<script> 
+    var avxEditor = CodeMirror.fromTextArea(document.getElementById("avx-code"), {
+      lineNumbers: true,
+      matchBrackets: true,
+      mode: "text/x-c++src",
+      theme: "abcdef",
+      electricChars:true,
+      readOnly: true
+    });
+    avxEditor.setSize(950, 500);   
+</script>
+<script>
+    var assemEditor = CodeMirror.fromTextArea(document.getElementById("assebmly-code"), {
+      lineNumbers: true,
+      matchBrackets: true,
+      mode: "text/x-c++src",
+      theme: "abcdef",
+      electricChars:true,
+      readOnly: true
+    });
+    assemEditor.setSize(600, 500);   
+</script>
+<p>
+In AVX it start utilizing a new assembly method called \(vaddpd, vmovsd, vmovpd\) against the usual code using \(movsd, addsd\). The way how SIMD works is that in a normal CPU processor a single register load a single element and apply the calculation, while in an SIMD register the register will load multiple element and apply the calculation on all of them, therefore saves time on reading and loading from RAM onto register since RAM is slower than register. Here is a graph explaination. SIMD therfore improves efficiency by utilizing register calculation since register is much faster than RAM.
+</p>
+<img src="../static/SIMD.png" alt="SIMD Explain">
+<li><b>What is Advanced Vector Extension (AVX)?</b></li>
+Advaned Vectorization Extension are a series of register instruction extension used to perform SIMD. It uses 16 YMM registers and each YMM register can hold and do simultaneous operation on: 
+<ul>
+    <li>eight 32-bit single-precision floating point numbers or</li>
+    <li>four 64-bit double-precision floating point numbers.</li>
+</ul>
+AVX using 256-bit register was first introduced with Sandy Bridge Processor (Intel Core 2xxx Series) in 2011, then with added instruction set (AVX2) introduced in Haswell process in 2013 (Intel Core 4xxx Series). It further expanded to AVX-512 which uses 512-bit register in Knights Landing in 2016 (Intel Xeon Phi Series). 
+<li><b>How to implement AVX in C++ on Intel Processor?</b></li>
+Intel has provided a very detailed user manual for AVX instruction <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">here</a> where it provide how to do math operations and load datas.  We need to include "immintrin.h" in the C++ library and -mavx when building using g++.
+</ul>
+{% endblock %}

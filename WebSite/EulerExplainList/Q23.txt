@@ -1,0 +1,1 @@
+We can use the similar logic in Q21 in terms of finding the sum of all proper divisor and loop through the numbers below 28123

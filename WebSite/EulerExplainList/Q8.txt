@@ -1,0 +1,1 @@
+This is a straight forward question where we parsing in all the values into a string and calculate the largest product of 13 adjacent digits.

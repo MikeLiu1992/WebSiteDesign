@@ -1,0 +1,1 @@
+We just loop through all numbers below 1000 and sum up all multiples of 3 or 5. Gives the following result.

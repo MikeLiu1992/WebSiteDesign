@@ -1,0 +1,1 @@
+Since we want to find the largest palindrome made by the product of two 3-digit numbers. A simple way might be just loop through all numbers between 900 to 999 and see which multiplication produce the largest palindrome. It will only take \(100 \times 100 / 2 = 5000\) steps so won't take too long.

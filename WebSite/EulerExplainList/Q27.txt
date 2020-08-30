@@ -1,0 +1,1 @@
+The finidng prime algorithm should be similar to previous questions asked. Since \(|a| < 1000\) and \(|b| \leq 1000\), we can know that \(2e6\) shold be sufficiently big enough to completely cover all prime numebers required. We therefore only need to find all prime numbers then cache it so we don't have toe find the same prime number multiple times.

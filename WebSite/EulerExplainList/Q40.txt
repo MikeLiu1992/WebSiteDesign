@@ -1,0 +1,1 @@
+We assigne each number of digit based on number range for example the digit can be a two digit number between 10 to 99 and 3 digit between 100 to 999... We then divide by the number of digit for each and the first number in the decimal part would be the digit desired. I have printed out the all the values below and this gives the answer: \(5\times3\times7\times2 = 210\)

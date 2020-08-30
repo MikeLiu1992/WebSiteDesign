@@ -1,0 +1,4 @@
+We know that triangle number can be computed using the following ways:
+$$ \frac{n(n + 1)}{2} $$
+
+Other than finding all the divisor one by one, a better way is to factorize all the prime number then multiply the power of each prime number. For example \(20 = 2^2 * 5\). This gives us: \((2 + 1)\times (1 + 1) = 6\) total number of divisors. Therfore, this gives us the solution below:

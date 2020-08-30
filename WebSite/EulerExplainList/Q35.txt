@@ -1,0 +1,1 @@
+We can precalc all the prime first then rotate the prime and see if each number are in the prime list. We can save the computational complexity by remove any prime containing even numbers since the rotate won't be a prime.

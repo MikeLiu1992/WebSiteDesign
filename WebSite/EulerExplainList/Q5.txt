@@ -1,0 +1,1 @@
+We only have to find all the prime number which are the perfect divisor of that value and find the highest value of power for that prime number between 1 to 20. For example, if we want number \(n\) to be divisable from 1 t0 20, it has to be divisable by \(2, 2^2 = 4, 2^3 = 8\) and \(2^4 = 16\). Similar for \(3\) and \(3^2 = 9\). This gives us the result below:

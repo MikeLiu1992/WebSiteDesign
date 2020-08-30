@@ -1,0 +1,1 @@
+This is a straight forward question. We can directly use the sort function from std library to sort the vector of strings.

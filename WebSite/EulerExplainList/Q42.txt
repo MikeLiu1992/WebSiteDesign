@@ -1,0 +1,1 @@
+We can precalc all the triangle numbers and cached it then check which word is tirangle number so we don't have to reclc and find triangle numbers.

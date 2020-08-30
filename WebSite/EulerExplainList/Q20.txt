@@ -1,0 +1,1 @@
+Since 100! can be a very large number a good way is to do the multiplication using string.

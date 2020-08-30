@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Markov Process
+{% endblock %}
+
+
+{% block main %}
+<p>This Section gives an introduction of Markov Process</p>
+<ul>
+    <li><b>Definition</b></li>
+    <p>A Markov Chain is a \(S_n\) which takes value from countable state space where: </p>
+    $$P(S_n = j | S_{n-1} = i_{n-1}...S_0 = j_0) = P(S_n = j | S_{n-1} = i_{n-1})$$
+    <li><b>Random Walk</b></li>
+    <p>A random walk is a Markov Chain where:</p>
+    $$S_0 = 0, S_n = S_{n-1} + \xi_n$$
+    where \(\xi_1, xi_2...\) are iid with probability p equal to 1 and 1-p equal to -1.
+    <li><b>Taxis in the airport</b></li>
+    <p>Let \(X_k\) number of people waiting for a taxi at moment k and \(Y_k\) number of people arriving at moment k. Then:
+        $$X_k = Y_k + (X_{K-1}-1)_+$$
+    Then \(X_k\) is also a Markov Chain.
+    </p>
+    <li><b>Transition Matrix</b></li>
+    <p>$$P = (p_{ij})^M$$ where \(p_{ij} = P(X_n = j|X_{n-1}=i) \)
+    We can know that the sum of each row in Transition Matrix equal to 1 and each element are non-negative. This kind of matrix are also known as stochastic matrix. We can also deduce that:
+    $$P = (p^m_{ij})^M$$ where \(p^m_{ij} = P(X_{n+m} = j|X_{n}=i)\) are called m-step Transition Matrix. Which equals to multiply transition matrix m times. Also for a state probability vector at step k \(\pi^k = \pi^{k-1}P = \pi^{0}P^m\). Also, \(\pi^*\) is a stationary distribution if \(\pi^* P = \pi^*\)</p>
+    <li><b>Transitino Matrix Property:</b></li>
+    <p>A state i is recurrent if \(\forall j: i \rightarrow j: j\rightarrow i\) A non recurrent state is a transient state.</p>
+    <ul>
+        <li>Theorem: In 1 class of equivalence all states are either recurrent or transcient</li>
+        <li>Period of State: is the greatest command divider n such that \(p_{ii}(n) \neq 0 \) noted by d(i). if d(i) = 1 then i is aperiodic</li>
+        <li>Theorem: All elements in 1 class of equivalence has the same period</li>
+    </ul>
+    <li><b>Ergodic Markov Chain:</b></li>
+    <p>A Markov Chains is ergodic if it only has 1 class of equivalence, reuccrent and period of state equals to 1. Also a Markov Chain is ergodic if \(\exists m:P_{ij}(m) \neq 0 \forall i,j \in S\)</p>
+    <li><b>Ergodic Theorem:</b></li>
+    Let \(X_t\) be Ergodic Markov Chain. Then \(lim_{n\rightarrow \infty}P_{ij}(n)\) exists denoted as \(\pi^*_j > 0\) and \(\Sigma_{j = 1}^M\pi^*_j = 1\)
+</ul>
+{% endblock %}

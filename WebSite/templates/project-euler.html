@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block title %}
+    Project Euler
+{% endblock %}
+{% block main %}
+<h3>Here are some intersting question from <a href="https://projecteuler.net/about">Project Euler</a></h3>
+<p>
+    I am trying to solve as many questions as possible. Meanwhile, please contact me if you have any better solution or ideas for each of the question. 
+    Currently I have solved question 1 to 42. You can search for the question by select question number in the box below.
+</p>
+<h3>Solved Question List</h3>
+<table class="w3-table w3-striped w3-border">
+    {% for items in question_solved %}
+        <tr>
+            {% for item in items %}
+                <td>
+                    <form action="/project-euler" method="post">
+                        <input class="btn btn-primary" type="submit" name="question_id" value= {{ item }}>
+                    </form>           
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+<h3>Question {{ qid }} {{ title }}</h3>
+<p>
+    {% for item in content %}
+        {{ item|safe}}
+        <br>
+    {% endfor %}
+</p>
+<h3>Solution: </h3>
+<p>
+    {% autoescape false %}
+        {{explain|string|replace("\n", "<br>")}}
+    {% endautoescape %}
+</p>
+<div class="w3-cell-row" id="code_panel">
+    <div class="w3-cell", style="width: 60%">
+        <form style="position: relative; margin-top: .5em;" action="/running_code" method="post">
+            <input class="btn btn-primary" type="submit" value="Run Code!">
+            <br><br><br>
+            <textarea id=cpp-code name="code">{{answer}}</textarea>
+        </form>
+    </div>
+    <div class="w3-cell", style="overflow: auto;">
+        <h3>Result:</h3>
+        <p>
+            {% autoescape false %}
+            {{ result | string | wordwrap(70) | replace("\n", "<br>")}}
+            {% endautoescape %}
+        </p>
+    </div>
+    {% if scroll %}
+    <script>
+        document.getElementById('{{ scroll }}').scrollIntoView();
+        // or
+        document.location.hash = '#' + '{{ scroll }}';
+    </script>
+    {% endif %}
+</div>
+<script> 
+    var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
+      lineNumbers: true,
+      matchBrackets: true,
+      mode: "text/x-c++src",
+      theme: "abcdef",
+      electricChars:true
+    });
+    cppEditor.setSize(950, 1000);
+</script>
+{% endblock %}

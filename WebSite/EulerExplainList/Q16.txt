@@ -1,0 +1,1 @@
+Since \(2^{1000}\) is a super huge number. Therefore, we will use string calculation to calculate the power. Gives the following result.

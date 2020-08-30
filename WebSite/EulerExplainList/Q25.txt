@@ -1,0 +1,5 @@
+Since 1000 digits is a huge number an easier way is to estimate the the index. We can derive that the nth term of the Fibonacci sequence is:
+
+$$\frac{(\frac{1 + \sqrt{5}}{2})^n-(\frac{1 - \sqrt{5}}{2})^n}{\sqrt{5}}$$
+
+Since we know that \(-1 < \frac{1 - \sqrt{5}}{2} < 0\). It converge to 0 as n goes big. Therefore, \((\frac{1 + \sqrt{5}}{2})^n\) dominate. So we can take the log and guess the value of n.
