@@ -7,4 +7,84 @@
 
 {% block main %}
 <p>Here is a brief overview of the Stationary process</p>
+<ul>
+    <li><b>Stationary Definition:</b></li>
+    <ul>
+        <li>Definition 1(Strictly): \(X_t\) is Stationary if </li>
+        $$(X_{t_1+h},X_{t_2+h}...X_{t_n + h})\stackrel{d}{=}(X_{t_1},X_{t_2}...X_{t_n})$$
+        For \(\forall t_1, t_2...t_h\ \in \mathbb{R}, \forall h > 0\)
+        <li>Definition 1(Weakly): \(X_t\) is Stationary if </li>
+        $$m(t) = \mathbb{E}(X_t) = Const$$
+        and \(\forall (t,s)\in \mathbb{R}, K(t,s) = k(t+h,s+h)\)<br>
+        or \(\exists \gamma s.t. \forall h > 0 K(t,s) = \gamma(t-s)\)
+    </ul>
+    <p>If \(\mathbb{E}X_t^2 < \infty\) then \(X_t\) is strictly stationary means it is also weakly stationary</p>
+    <p>If \(X_t\) is a Gaussian process then strictly stationary and weakly stationary is the same</p>
+    <p>Properties of \(\gamma(x)\):
+        <ul>
+            <li>\(\gamma(0) \geq 0\)</li>
+            <li>\(|\gamma(t)| \leq \gamma(0)\)</li>
+            <li>\(\gamma\) is even</li>
+        </ul>
+    </p>
+    <li><b>Some Process example:</b></li>
+    <ul>
+        <li>White Noise Process</li>
+        $$\mathbb{E}X_t = 0, K(t,s) = \sigma^2\mathbb{1}[t = s]=\sigma(x)=\sigma^2\mathbb{1}[x = 0]$$
+        <li>Random Walks is not stationary</li>
+        <li>Brownian Motion is not stationary</li>
+        <li>Moving Average Process: (MA(q))</li>
+        <p>
+            $$Y_t = X_t + a_1X_{t - 1} + ... + a_qX_{t - q}$$
+            where \(X_t\) follows White noise process \(WN(0,\sigma^2)\). Then:
+            $$\mathbb{E}Y_t = 0$$
+            And
+            $$K(t,s) =\Sigma_{j = 0}^q\Sigma_{k = 0}^q a_ja_k\sigma^2\mathbb{1}[t-s=j-k]$$
+        </p>
+        <li>Autoregressive Process: (AR(p))</li>
+        <p>
+            $$Y_t = Y_t + a_1Y_{t - 1} + ... + a_pY_{t - p} + \epsilon_t$$
+            And:
+            $$Cov(\epsilon_t, Y_s) = 0 \forall t > s$$
+        </p>
+    </ul>
+    <li><b>Spectral Density:</b></li>
+    <ul>
+        <li>Bochner-Khinchin's Theorem:</li>
+        <p>\(\phi(u)\) is a characteristic function if and only if:</p>
+        <ul>
+            <li>\(\phi\) is continuous</li>
+            <li>\(\phi\) is positive semidefinite (i.e.\(\Sigma Z_j\overline{Z_k}\phi(u_j-u_k) \geq 0\)) for \(\forall (Z_1...Z_n \in \mathbb{C}^n, (u_1,...u_n) \in \mathbb{R}^n\)</li>
+            <li>\(\phi(0) = 1\)</li>
+        </ul>
+        <p>Based on the above, we can see that if \(X_t\) is weakly stationary then there exists \(\gamma: K(t,s) = \gamma(t-s)\)</p> then \(\exists g(x): \gamma(u) = \int e^{iux}g(x)dx = F[g](x)\) Thus: \(g(x) = \frac{1}{2\pi}\int e^{-iux}\gamma(u)du\). Function g is the Spectral Density of \(X_t\) And in discrete time: \(g(x) = \frac{1}{2\pi}\Sigma e^{-ihx}\gamma(h)\)
+        <li>Some examples:</li>
+        <ul>
+            <li>White Noise Spectral Density is: \(g(x)=\frac{\sigma^2}{2\pi}\)</li>
+            <li>MA(1) Process: \(g(x)=\frac{\sigma^2}{2\pi}(1 + a^2 + 2aCos(x))\)</li>
+        </ul>
+        <p>Proposition: \(g(x)\) is a Spectral Density of X_t if and only if:</p>
+        <ul>
+            <li>\(g(x) \geq 0\)</li>
+            <li>\(g(x)\) is even</li>
+            <li>\(\int_{-\pi}^\pi g(x) dx < \infty\)</li>
+        </ul>
+        <li>Usage with Stochastic Integration:\(\int_a^bX_tdt\)</li>
+        <p>Properties:
+            $$\mathbb{E}[\int X_tdt] = \int \mathbb{E}[X_t]dt$$
+            $$\mathbb{E}[(\int X_tdt)^2] = \int\int \mathbb{E}[X_tX_s]dtds$$
+            $$Var\int X_tdt = \int\int k(t, s)dtds$$
+        </p>
+        <li>Filter: \(X_t \rightarrow Y_t\)</li>
+        <p>Some filter example:
+            $$Y_t = \Sigma \rho(s)X_{t - i}$$
+            $$Y_t = \int \rho(s)X_{t-s}ds$$
+            These two both linear and time invariant. Then if \(X_t\) is weakly stationary with 0 expectation and \(Y_t\) is a linear filter of \(X_t\) then \(Y_t\) is also stationary and 
+            $$g_Y(x) = g_X(x)|F[\rho](x)|^2$$
+            Here \(F[\rho](x)\) is the Fourier Transformation where:
+            $$F[\rho](x) = \int_\mathbb{R} e^{iux}\rho(u)du$$
+            This can be used to approximate the linear parameter for the filter to approximate the filtered process into a weakly stationary process. 
+        </p>
+    </ul>
+</ul>
 {% endblock %}
