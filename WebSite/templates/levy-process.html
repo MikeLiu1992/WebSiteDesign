@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Levy Process
+{% endblock %}
+
+
+{% block main %}
+<p>Here is a brief overview of the Levy process. Let's start with some comparison</p>
+<table class="w3-table">
+    <tr><td>Poisson Process</td><td>Brownian Motion</td><td>Levy Process</td></tr>
+    <tr><td>\(N_0=0\)</td><td>\(W_0=0\)</td><td>\(L_0=0\)</td></tr>
+    <tr>
+        <td>Has Independent Increment</td>
+        <td>Has Independent Increment</td>
+        <td>Has Independent Increment</td>
+    </tr>
+    <tr>
+        <td>Has Stationary Increment</td>
+        <td>Has Stationary Increment</td>
+        <td>Has Stationary Increment</td>
+    </tr>
+    <tr>
+        <td>\(N_t - N_s \sim Pois(\lambda(t-s))\)</td>
+        <td>\(W_t - W_s \sim N(0, t-s)\)</td>
+        <td>\(L_t - L_s \sim P(t-s)\) 
+            <br>Where \(P\) is called infintely divisable distribution
+        </td>
+    </tr>
+</table>
+<p>This gives us a defition of Levy Process which is 0 at time 0, has Independent and Stationary increment, has the above infintely divisable distribution and stochastic continuous. The trajectory of a Levy process is called Cadlag function. \(f\) is a cadlag function if:</p>
+$$\exists lim_{s \rightarrow t-}f(s)=f(t-), \exists lim_{s \rightarrow t+}f(s) = f(t+) = f(t-)$$
+<ul>
+    <li><b>Infintely Divisable Distribution</b></li>
+    <p>\(\xi\) has infintely divisable distribution if: \(\forall n \geq 2, \xi \xrightarrow{d} \Sigma Y_i\) where \(Y_1, Y_2...\) are i.i.d and:</p>
+    $$\phi_{\xi}(u) = (\phi_{Y_i}(u))^n$$
+    <p>A stable distribution are \(\xi_1, \xi_2...\) are i.i.d to \(\xi\)</p>
+    $$\Sigma \xi \xrightarrow{d} a_n\xi + b_n$$
+    <p>A stable distribution means the sum of the rv follow the same distribution as the individual distribution. Some example distribution like: Normal, Cauchy, Gamma, Exponential, Negative Binomial, Geometric, Poisson, Compound Poisson distribution are infintely divisable distribution but among them only Normal and Cauchy are stable distribution. Bernoulli and Uniform distribution are not infintely divisable</p>
+    <p>Property of infintely divisable distribution:</p>
+    <ul>
+        <li>\(\phi(u) = 0\) does not have any real solution</li>
+        <li>\(supp(\xi)\) is unbounded. Where \(supp(\xi)\) is all set contain \(\xi\) such that the measure of each set are strongly positive.</li>
+    </ul>
+    <br>
+    <li><b>Characteristic Exponent of Levy Process</b></li>
+    <p>Definition: For any process \(L_t\):</p>
+    $$\phi(u) = \mathbb{E}[e^{iuL_t}] = e^{t\psi(u)}$$
+    <p>Here \(\psi(u)\) is the Characteristic exponent. For a Levy Process, the distribution of \(L_t\) is determined by \(L_1\) where \(\mathbb{E}L_t = t \mathbb{E}L_1, Var(L_t) = tVar(L_1), K(t,s) = min(t,s)VarL_1\)</p>
+    <li><b>Levy Measure:</b></li>
+    <p>Levy measure is the expectation of the amount of jumps where the size of jump belongs to the Borel non zero set between \(t \in [0,1]\). For Brownian motion, the Levy measure \(\nu\) is 0. For Poisson process \(\nu(B) = 0\) if \(1 \not\in B\) and \(\nu(B) = EN_1=\lambda\) if \(1 \in B\) 
+    For compound Poisson process: \(\Sigma_{k=1}^{N_t}\xi_k\) we have:
+    \(\nu(B) = \int_B\lambda P_{\xi}(x)dx\) where \(\lambda P_{\xi}\) is called Levy density
+    </p>
+    <li><b>Levy Khintchine Theory:</b></li>
+    <p>The Characteristic Exponent of any Levy process can be fomulated as:</p>
+    $$\psi(u) = iu\mu - \frac{1}{2}u^2\sigma^2 + \int_R(e^{iux}-1-iux\mathbb{1}[|x| < 1])\nu(dx)$$
+    Where \(\mu \in R, \sigma > 0, \nu\) is a Levy Measure and we call \((\mu, \sigma, \nu)\) a Levy-Khintchine triplet.
+    <p>The above tells us a Levy Process \(X_t = \mu t + \sigma W_t + J_t\) where \(W_t\) is a Brownian motion and \(J_t\) is a jump process.</p>
+    <p>The Levy process is a bounded variation if and only if \(\sigma = 0\) and \(\int_{|x| < 1}\nu(dx) < \infty\) in this case:</p>
+    $$\psi(u) = iu\tilde{\mu} + \int(e^{iux} - 1)\nu(dx)$$
+    <li><b>Levy Based Models:</b></li>
+    <ul>
+        <li>Time Changed Model:</li>
+        <p>Let \(log\frac{S_t}{S_0} = W_T(s)\) and \(T(s)\) be the cumulative amount of transactions from 0 to s</p>
+        <p>Monroe's Theorem: The class of all brownian motion coicide with all semi martingales.</p>
+        $$\phi_{X_t(s)}(u) = L_{T(s)}(-\psi(u))$$
+        <li>Stochastic Volatility: (Cox-Ingersoll-Ross)</li>
+    </ul>
+</ul>
+{% endblock %}

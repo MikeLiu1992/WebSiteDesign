@@ -63,6 +63,14 @@ def gaussian_process():
 def stationary_process():
     return render_template("stationary-process.html")
 
+@app.route("/stochastic-calculus", methods=["GET", "POST"])
+def stochastic_calculus():
+    return render_template("stochastic-calculus.html")
+
+@app.route("/levy-process", methods=["GET", "POST"])
+def levy_process():
+    return render_template("levy-process.html")
+
 @app.route("/project-euler", methods=["GET", "POST"])
 def project_euler():
     tableRange = list()

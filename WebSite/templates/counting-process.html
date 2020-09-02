@@ -99,5 +99,17 @@
     Also (Central Limit Theory)
     $$lim_{t\rightarrow \infty}\frac{N_t - t/\mu}{Var(\xi_1)\sqrt{t}\mu^{-3/2}} \rightarrow N(0, 1)$$
     </p>
+    <li><b>Types of Convergence:</b></li>
+    <ul>
+        <li>Almost Surely</li>
+        $$\xi_n \xrightarrow{a.s.} \xi \leftrightarrows \mathbb{P}[\xi_n \rightarrow \xi] = 1$$
+        <li>Converge in Mean Square</li>
+        $$\xi_n \xrightarrow{L^2} \xi \leftrightarrows \mathbb{E}[\xi_n - \xi]^2 = 0$$
+        <li>Converge in Probability</li>
+        $$\xi_n \xrightarrow{p} \xi \leftrightarrows \forall \epsilon > 0, \mathbb{P}[|\xi_n - \xi| > \epsilon] \rightarrow 0$$
+        <li>Converge in Distribution</li>
+        $$\xi_n \xrightarrow{d} \xi \leftrightarrows \forall \epsilon > 0, \mathbb{P}[|\xi_n \leq x|  \rightarrow \mathbb{P}[|\xi \leq x|, \forall x \in \mathbb{R}$$ which is a point of continuity of the distribution function.
+    </ul>
+    <p>Almost surely and mean square convergence guarantee probability convergence. Probability convergence guarantee distribution convergence. If Converge in distribution and limit converge to constant then convergence in distribution guarantee converge in probability</p>
 </ul>
 {% endblock %}

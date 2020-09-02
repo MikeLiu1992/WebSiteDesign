@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stochastic Calculus
+{% endblock %}
+
+
+{% block main %}
+<p>Here is a brief overview of the Stochastic Calculus</p>
+<ul>
+    <li><b>Stochastic Derivative</b></li>
+    <p>\(X_t\) is differntiable at time \(t_0\) when:
+        $$lim_{h\rightarrow 0}\frac{X_{t_0 + h} - X_{t_0}}{h}\xrightarrow{L^2} \xi = X'_{t_0}$$
+        The following proposition holds:
+        <br>If \(E[X^2_t] < \infty\) then \(X_t\) is differntiable if and only if: \(m(t) = E[X_t]\) is differntiable at \(t_0\) and \(\frac{\partial}{\partial t\partial s} K(t,s)\) exists at \((t_0, t_0)\)
+        <br>Brownian motion is not differntiable at any point.
+        <br>Weakly staionary process is differntiable if and only if \(\gamma''(0)\) exists.
+        <br>\(X_t\) be independent increment is not differntiable
+    </p>
+    <li><b>Stochastic Integration</b></li>
+    <ul>
+        <li>\(\int X_tdt\)</li>
+        $$\int_a^bX_t(\omega)dt = lim \Sigma_{k=1}^n X_{t_{k-1}}(w)(t_k-t_{k-1})$$
+        <p>Where \( t_0 = a < t_1 ...< t_n = b \). The limit is understood as a mean square converge. Also if \(m(t)\) and \(K(t,s)\) are continuous then the integral exists.</p>
+        $$E[\int X_tdt] = \int E[X_t]dt$$
+        $$Var[\int X_tdt] = \int\int K(t,s)dsdt$$
+        <li>\(\int f(t)dW_t\) (Wiener Integral)</li>
+        <p>Denote Wiener Integral as \(I(f)\). If \(f(t)\) is a step function then:
+            $$I(f) \sim N(0, \int_a^b f^2(t)dx)$$
+        </p>
+        <li>\(\int X_tdW_t\)</li>
+        <p>Let \(I(X_t) = \int X_tdW_t\).
+            <br>Filtration: a sequence of \(\sigma-\) algebra \(F_t\) on \((\Omega, F, P)\) such that \(F_t \subset F_s, \forall t \leq s\). Let \(X_t\) be \(F_t\) adapted with finite variance and \(Xt \in L^2_{ad}\) Then:
+            $$I(X_t)=lim_{n \rightarrow \infty}\Sigma_{i=1}^nX_{t_{i-1}}(W_{t_i} - W_{t_{i-1}})$$
+        </p>
+        <li>\(\int X_tdH_t\) Where \(H_t\) is a Ito Process</li>
+        <p>\(H_t = H_0 + \int_0^tb_sds + \int_0^t\sigma_sdW_s\) Here \(F_t\) is a filtration,\(b_s, \sigma_s\) are adapted to \(F_t\). \(W_t\) is \(F_t\) Brownian motion Then:</p>
+        $$\int X_tdH_t = \int b_sX_sds + \int \sigma_sX_sdW_s$$
+        <p>If \(H_t\) is a Ito Process then:</p>
+        $$f(t,H_t) = f(0,H_0) + \int_0^tf'_1(s,H_s)ds + \int_0^tf'_2(s,H_s)dH_s + \frac{1}{2}\int_0^tf''_{22}(s,H_s)\sigma^2_sds$$
+    </ul>
+</ul>
+{% endblock %}

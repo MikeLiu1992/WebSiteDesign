@@ -86,5 +86,15 @@
             This can be used to approximate the linear parameter for the filter to approximate the filtered process into a weakly stationary process. 
         </p>
     </ul>
+    <li><b>Ergodic Time Series</b></li>
+    <p>\(X_t\) is Ergodic if:
+        $$\frac{1}{T}\Sigma_{t = 1}^TX_t \rightarrow C$$
+        When \(T \rightarrow \infty\)
+        <br>
+        Proposition for \(X_t\) if \(K(s,t)\) is bounded, define \(C(T) = Cov(X_T, M_T)\) where \(M_T = \frac{1}{T}\Sigma_{t = 1}^TX_t\) Then:
+        $$VarM_T\rightarrow 0, C(T)\rightarrow 0$$
+        If \(X_t\) is weakly stationary, let \(\gamma\) be the convariance function then
+        if \(\frac{1}{T}\Sigma_{t=0}^T\gamma(t)\rightarrow 0\) Then \(X_t\) is Ergodic. Also, if \(\gamma(t)\rightarrow 0\) then \(X_t\) is Ergodic
+    </p>
 </ul>
 {% endblock %}
