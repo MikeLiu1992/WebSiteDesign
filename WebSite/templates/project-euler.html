@@ -39,8 +39,9 @@
     <div class="w3-cell", style="width: 60%">
         <form style="position: relative; margin-top: .5em;" action="/running_code" method="post">
             <input class="btn btn-primary" type="submit" value="Run Code!">
+            <input name="question_id" type="hidden" value={{ qid }}>
             <br><br><br>
-            <textarea id=cpp-code name="code">{{answer}}</textarea>
+            <textarea id=python-code name="code">{{answer}}</textarea>
         </form>
     </div>
     <div class="w3-cell", style="overflow: auto;">
@@ -60,10 +61,10 @@
     {% endif %}
 </div>
 <script> 
-    var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
+    var cppEditor = CodeMirror.fromTextArea(document.getElementById("python-code"), {
       lineNumbers: true,
       matchBrackets: true,
-      mode: "text/x-c++src",
+      mode: "python",
       theme: "abcdef",
       electricChars:true
     });

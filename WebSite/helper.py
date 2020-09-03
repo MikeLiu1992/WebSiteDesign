@@ -1,7 +1,8 @@
 import os
 import sys
 import threading
-import subprocess 
+import stat
+import subprocess
 
 ##Project Euler Helper Function
 def specialqid(qid):
@@ -21,7 +22,7 @@ def readFile(qid):
     return title, content
 
 def readAnswer(qid):
-    f = open("EulerAList/pset" + str(qid) + ".cpp", "r")
+    f = open("EulerAList/pset" + str(qid) + ".py", "r")
     content = f.read()
     f.close()
     return content
@@ -33,27 +34,20 @@ def readExplain(qid):
     return content
 
 def runningCode(code, qid, ipAddress):
-    ipAddress = ipAddress + qid
-    text_file = open("./tmpCache/" + ipAddress +"tmp.cpp", "w")
+    ipAddress = str(ipAddress) + str(qid)
+    text_file = open("/tmp/" + ipAddress +"tmp.py", "w+")
     n = text_file.write(code)
     text_file.close()
-    ##Compile:
     try:
-        out = subprocess.check_output('g++ tmpCache/' + ipAddress + 'tmp.cpp -o tmpCache/tmp' + ipAddress, stderr=subprocess.STDOUT,shell=True)
-    except subprocess.CalledProcessError as exc:
-        return exc.output.decode('utf8')
-    try:
-        output = subprocess.check_output('tmpCache/tmp' + ipAddress, stderr=subprocess.STDOUT,shell=True,timeout=10)
-        return output.decode('utf8')
-    except subprocess.TimeoutExpired as exc:
-        return "Process Time Out!"
+        out = subprocess.check_output('python3 /tmp/' + ipAddress + 'tmp.py', stderr=subprocess.STDOUT,shell=True,timeout=10)
+        return out.decode('utf8')
     except subprocess.CalledProcessError as exc:
         return exc.output.decode('utf8')
 
 def cleanCache(qid, ipAddress):
     ipAddress = ipAddress + str(qid)
-    out = subprocess.check_output('rm tmpCache/' + ipAddress + 'tmp.cpp', stderr=subprocess.STDOUT,shell=True)
-    out = subprocess.check_output('rm -f tmpCache/tmp' + ipAddress, stderr=subprocess.STDOUT,shell=True)
+    if os.path.exists('/tmp/' + ipAddress + 'tmp.py'):
+        os.remove('/tmp/' + ipAddress + 'tmp.py')
 
 
 
