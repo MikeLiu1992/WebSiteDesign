@@ -1,6 +1,7 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
 from flask_caching import Cache
+from flask_sitemap import Sitemap
 from helper import readFile, readAnswer, runningCode, readExplain, cleanCache
 from simdHelper import readSimdFile
 
@@ -9,12 +10,14 @@ config = {
     "CACHE_TYPE": "simple", # Flask-Caching related configs
     "CACHE_DEFAULT_TIMEOUT": 300,
     "TEMPLATES_AUTO_RELOAD": True,
-    "CACHE_THRESHOLD": 50000
+    "CACHE_THRESHOLD": 50000,
+    "SITEMAP_INCLUDE_RULES_WITHOUT_PARAMS": True
 }
 app = Flask(__name__)
 # tell Flask to use the above defined config
 app.config.from_mapping(config)
 cache = Cache(app)
+ext = Sitemap(app)
 # Ensure templates are auto-reloaded
 startQuestion = 1
 endQuestion = 42
