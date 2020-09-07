@@ -39,10 +39,12 @@ def runningCode(code, qid, ipAddress):
     n = text_file.write(code)
     text_file.close()
     try:
-        out = subprocess.check_output('python3 /tmp/' + ipAddress + 'tmp.py', stderr=subprocess.STDOUT,shell=True,timeout=10)
+        out = subprocess.check_output('python3 /tmp/' + ipAddress + 'tmp.py', stderr=subprocess.STDOUT,shell=True,timeout=20)
         return out.decode('utf8')
     except subprocess.CalledProcessError as exc:
         return exc.output.decode('utf8')
+    except subprocess.TimeoutExpired as exc:
+        return exc
 
 def cleanCache(qid, ipAddress):
     ipAddress = ipAddress + str(qid)

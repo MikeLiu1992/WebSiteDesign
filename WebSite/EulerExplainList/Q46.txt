@@ -1,0 +1,1 @@
+We first generate a list of prime number set and find out if any odd number can't be decomposted to a square number.

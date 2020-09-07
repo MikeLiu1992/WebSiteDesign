@@ -1,0 +1,1 @@
+Use the method in the previou question we can find the number of distinct prime factors for each number. The we just have to loop through each value and see which one has 4 distinct prime factors.

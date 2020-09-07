@@ -20,7 +20,7 @@ cache = Cache(app)
 ext = Sitemap(app)
 # Ensure templates are auto-reloaded
 startQuestion = 1
-endQuestion = 42
+endQuestion = 47
 questionPerLine = 30
 default_qid = 1
 
@@ -74,6 +74,18 @@ def stochastic_calculus():
 @app.route("/levy-process", methods=["GET", "POST"])
 def levy_process():
     return render_template("levy-process.html")
+
+@app.route("/volatility-process", methods=["GET", "POST"])
+def volatility_process():
+    return render_template("volatility-process.html")
+
+@app.route("/volatility-curve", methods=["GET", "POST"])
+def volatility_curve():
+    return render_template("volatility-curve.html")
+
+@app.route("/volatility-term", methods=["GET", "POST"])
+def volatility_term():
+    return render_template("volatility-term.html")
 
 @app.route("/project-euler", methods=["GET", "POST"])
 def project_euler():

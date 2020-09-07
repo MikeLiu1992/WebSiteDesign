@@ -1,0 +1,30 @@
+We can do some preliminary analysis here:
+
+Since \(d_4d_5d_6\) is divisible by 5, \(d_6\) must be either 0 or 5.
+
+Based on the above if \(d_6 = 0\) then \(d_7d_8\) has to be divisible by 11. Therefore \(d_7 = d_8\) which is wrong. Therefore \(d_6 = 5\). As a result, \(d_6d_7d_8\) can only be:
+506, 517, 528, 539, 561, 572, 583, 594
+
+Since \(d_d5d_6d_7\) is divisible by 7 the respective \(d_5d_6d_7d_8\) would be:
+3506, 6517, 2528(removed), 9528, 5539(removed), 0561, 7561, 3572, 6583, 2594, 9594(removed)
+
+so \(d_5d_6d_7d_8\) must be selected from:
+3506, 6517, 9528, 0561, 7561, 3572, 6583, 2594
+
+Since \(d_7d_8d_9\) must be divisible by 13, \(d_5d_6d_7d_8d_9\) would be:
+35065(removed), 95286, 05611(removed), 75611(removed), 35728, 65832, 25949(removed)
+
+Since \(d_8d_9d_{10}\) must be divisible by 17, \(d_5d_6d_7d_8d_9d_{10}\) would be:
+952867, 357289, 658323(removed)
+
+Since \(d_4\) must be even, \(d_4d_5d_6d_7d_8d_9d_{10}\) would be:
+0952867, 4952867, 0357289, 4357289, 6357289
+
+Since \(d_3d_4d_5\) must be divisible by 3 therefore \(d_3d_4d_5d_6d_7d_8d_9d_{10}\) would be:
+30952867, 60357289, 06357289
+
+Therefore, \(d1\) and \(d_2\) can only be: 1 or 4 lead to the following result:
+
+
+
+

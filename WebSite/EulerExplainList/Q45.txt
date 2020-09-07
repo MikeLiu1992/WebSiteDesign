@@ -1,0 +1,1 @@
+Similar to the previous question we precalc the value for triangle, pentagon and hexagon value then cache it in the unordered_set.

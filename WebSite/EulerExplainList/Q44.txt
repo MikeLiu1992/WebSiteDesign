@@ -1,0 +1,1 @@
+We need to do an estimate of the boundary here. Let's pre generate 1 million pentagon number and search which one is a pentagon. We can place it into an unorder set to speed up computation.

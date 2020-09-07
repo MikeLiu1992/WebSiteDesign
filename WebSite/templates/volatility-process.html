@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Volatility Process
+{% endblock %}
+
+
+{% block main %}
+
+Black Scholes model is under the assumption that volatility is flat. However, we normally don't see this case in reallity. In most market conditions we can see that the <a href = "https://en.wikipedia.org/wiki/Implied_volatility" >implied volatility</a> can be different across strike and expiry. There are lots of Quant Theory trying to explain such difference and I will give a brief overview of them and how they are used in practise.
+
+<ul>
+    <li><a href = "https://en.wikipedia.org/wiki/Local_volatility"><b>Local Volatility Model</b></a></li>
+    Local Volatility model was published by <a href="https://web.archive.org/web/20120907114056/http://www.risk.net/data/risk/pdf/technical/2007/risk20_0707_technical_volatility.pdf">B.Dupire in 1994</a>. For a given call option, the price can be calculated:
+    $$C(K,T) = \int_K^{\infty}(S - K) p(S)dS$$
+    Where \(p(S)\) is the density of the spot at time \(T\). Taking the derivative of the above equation w.r.t strike \(K\) twice gives us:
+    $$\frac{\partial^2C}{\partial K^2} = \frac{\partial \int_K^{\infty}-p(S)dS }{\partial K} = p(K)$$
+    This tells us that regardless of the underlying price movement, its spot distribution equals to the option price twice differentiate w.r.t strike. This tells us that the terminal distribution of the spot price can be estimated based on terminal option price which is given in the market.
+    <br>Now we just need a proper stochastic process such that the above probability density is satisfied where Dupire finds a good tool for analyzing probability density in stochastic process: <a href="https://en.wikipedia.org/wiki/Fokker%E2%80%93Planck_equation">Fokker-Planck Equation</a>
+    <br><b>Fokker-Planck Equation:</b> 
+    Given an Ito Process: \(dX_t = \mu(X_t, t)dt + \sigma(X_t, t)dW_t\) it follows that:
+    $$\frac{\partial p(x,t)}{\partial t} = -\frac{\partial \mu(x,t)p(x,t)}{\partial x} + \frac{\partial^2 \frac{1}{2}\sigma^2(x,t)p(x,t)}{\partial x^2}$$
+    <br>Let's take the derivative of \(C(K, T)\) w.r.t T we get:
+    $$\frac{\partial C(x,t)}{\partial T} = \int_K^{\infty}(S - K) p_t(S)dS = \int_K^{\infty}(S - K)\{[-\mu X_tp]_S + \frac{1}{2}[\sigma^2 X_t^2p]_{SS}\}dS$$
+    $$= \int_K^{\infty}(S - K)d\{[-\mu X_tp] + \frac{1}{2}[\sigma^2 X_t^2p]_{S}\}$$
+    Integration by parts gives us:
+    $$\frac{\partial C(x,t)}{\partial T} = \frac{1}{2}\sigma^2 x^2p(x,t) = \frac{1}{2}\sigma^2 x^2\frac{\partial^2C}{\partial x^2}$$
+    $$\sigma^2(x,T) = \frac{2C_T}{C_{xx}}$$
+    We can then use the above formula to price exotic or path dependent option given a list of exchange traded option price. Given a list of vanilla option prices, we can approximate it's second order derivative and it's theta. Then we can approximate out the volatility for a certain price level. After that we can price exotic options using normal Brownian motion process with local volatility given. With dividend terms, Dupire states the following local vol differencial equation:
+    $$\frac{\partial C(K,T)}{\partial T} = \frac{1}{2}\sigma(K,T,S_0)^2 K^2\frac{\partial^2 C}{\partial K^2} - (r-d)K\frac{\partial C}{\partial K} - dC$$
+    <br>It is good to see that using Dupire Vol, we can match all vanilla prices on market quiet easily. However, Dupire's model the basic assumption from Fokker-Plank assume the only variation of vol comes from spot while in real life, vol itself has randomness. One example could be by looking at the above equation \(\sigma^2(x,T) = \frac{2C_T}{C_{xx}}\) The closer expiry ATM option normally has higher theta decay than longer expiry options. Assuming we see similar volatility smile across different expiries, \(C_{xx}\) would be similar since it describe the volatility smile shape. This means the forward vol for ATM options after the front end expiry can be very small or even close the zero while in reallity, we see volatility smile norammly rolling forward in parallel fashion. In order to addressing the flattening forward vol and forward skew. We have to introduce randomness for volatility, in this case a new parameter called volatility of vol  (volVol)
+    <li><a href = "https://en.wikipedia.org/wiki/Heston_model"><b>Heston Volatility Model</b></a></li>
+    One way to address the issue from local volatility is by using Heston Model proposed by <a href="https://www.semanticscholar.org/paper/A-Closed-Form-Solution-for-Options-with-Stochastic-Heston/4011535b91fd869b8138112739fcad535ac1562c">Steven Heston</a>:
+    $$dS_t = \mu S_tdt + \sqrt{\nu_t}S_tdW_t^S$$   
+    $$d\nu_t = \kappa(\theta - \nu_t)dt + \xi\sqrt{\nu_t}dW_t^\nu$$
+    $$\mathbb{E}[dW_t^SdW_t^\nu] = \rho dt$$
+    In the paper, Heston proposed an explicit solution to the vanilla option price where \(C(S, \nu, t) = SP_1 - Ke^{-(T-t)r}P_2\) and:
+    $$P_j(x, \nu, T; ln[K]) = \frac{1}{2} + \frac{1}{\pi}\int_0^{\infty}Re[\frac{e^{-i\phi ln[K]} f_j(x,\nu,T;\phi)}{i\phi}]d\phi$$
+    Where:
+    $$f_j(x,\nu,T;\phi) = e^{C(T-t; \phi) + D(T-t; \phi)\nu + i\phi x}$$
+    $$C(\tau;\phi) = r\phi i\tau + \frac{a}{\sigma^2}\{(b_j - \rho\sigma\phi i + d)\tau - 2 ln[\frac{1 - ge^{d\tau}}{1 - g}]\}$$
+    $$D(\tau; \phi) = \frac{b_j - \rho\sigma\phi i + d}{\sigma^2}[\frac{1 - ge^{d\tau}}{1 - g}]$$
+    And \(a = \kappa\theta, b_1 = \kappa - \rho\xi, b_2 = \kappa\):
+    $$g = \frac{b_j - \rho\sigma\phi i + d}{b_j - \rho\sigma\phi i - d}$$ 
+    $$d = \sqrt{(\rho\sigma\phi i - b_j)^2 - \sigma^2(2u_j\phi i - \phi^2)}$$
+    And \(u_1 = 0.5, u_2 = -0.5\)
+    <br>In reallity, we calibrate \(\xi, \kappa, \theta\) to the vanilla market using least square or gradient descent so Heston model fits in the vanilla market, then we can price exotic or other path dependent options using the above process.
+    <br>Compared with local volatility model, Heston model is able to solve the flattening forward vol issue by introducing randomness on volatility, however, compared with local volatility model, which directly fits to the vanilla market, Heston model is much harder to fit the vanilla market and it is a lot more computaional intensive calibrating Heston model compared with local volatility model. Also the paremeter set maybe unstable and sensitve to vanilla market which leads to unstable exotic option prices.
+    <li><a href = "https://en.wikipedia.org/wiki/SABR_volatility_model"><b>SABR Model</b></a></li>
+    Another way of the volatility process which is widely used in interet rate market is the SABR model proposed by <a href="http://lesniewski.us/papers/published/ManagingSmileRisk.pdf">Patrick S. Hagan, Deep Kumar, Andrew Lesniewski, and Diana Woodward</a>. Assuming a single forward \(F\) such as a <a href="https://en.wikipedia.org/wiki/Libor">LIBOR</a> forward rate. It follows that:
+    $$dF_t = \sigma(F_t)^\beta dW_t$$
+    $$d\sigma_t = \alpha \sigma_t dZ_t$$
+    $$\mathbb{E}[dW_tdZ_t] = \rho dt$$
+    Even though lots of rates product are traded OTC, there is a very active <a href = "https://www.cmegroup.com/trading/interest-rates/stir/eurodollar_contractSpecs_options.html?optionProductId=3#optionProductId=3">Eurodollar Option Market in CME</a> where we can actively calibrate the forward LIBOR rate to. There is also approxmiate European option price for the above process described in the paper which I will skip here. Compared with Heston model, SABR model could provide a better approximation. Because, equity market typically follows log normal process for the spot. Therefore, \(dlnS_t\) will have a diffusion term volatility of \(\sqrt{\nu_t}\) which is inline with the equity diffucion process while rates typically doesn't follow log normal process, leading to the fact that the above Heston process gives higher vol diffusion for high rates and lower vol diffusion for low rates which may not always be the case. SABR is able to provide a degree of flexibility by providing a parameter \(\beta\) which models the skewness in the rates market. When \(\beta < 1\), we wil have a so-called leverage effect which is more equity market like and when \(\beta > 1\) we will have a inverse leverage effect which is more common in commodity market. Since rates vol can move up and down on both way, we can make this parameter calibrable
+</ul>
+
+{% endblock %}
